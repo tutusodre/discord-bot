@@ -11,7 +11,6 @@ bot.once('ready', () => {
     bot.user.setPresence( {
         type: "PLAYING",
         name: 'osu!'
-        //url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     });
 })
 
@@ -37,12 +36,7 @@ bot.on('message', async msg => {
     const args = msg.content.slice(config.prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
     const join = args.join(" ");
-    if(command === 'say') {
-        msg.channel.send('sending...');
-        bot.channels.fetch('741240735340167208').then(channel => {
-            channel.send(join);  
-        }); 
-    }
+    
     
 });
 
