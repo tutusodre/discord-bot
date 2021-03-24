@@ -5,7 +5,6 @@ const testCh = '824035075654025286';
 let geral = '741240735340167208';
 const supimpa = '814944768294649886';
 
-const farm = require('./farm');
 bot.once('ready', () => {
     console.log('ready');
     bot.user.setPresence( {
