@@ -1,42 +1,25 @@
 const Discord = require('discord.js');
-const config = require('./config.json');
+const {prefix, token, geral, 
+    teste, supimpa} = require('./config.json');
 const bot = new Discord.Client();
+/*
 const testCh = '824035075654025286';
-let geral = '741240735340167208';
+const geral = '741240735340167208';
 const supimpa = '814944768294649886';
+*/
 
 bot.once('ready', () => {
     console.log('ready');
-    bot.user.setPresence( {
-        type: "PLAYING",
-        name: 'osu!'
-    });
+    
 })
 
-bot.on('message', async msg => {
-    if(msg.author.bot) return;
-    if (!message.content.startsWith(config.prefix)) return;
-    const user = msg.mentions.users.first();
-    
-    if(!user) {
-        return;
-    }
-    
-    let status = msg.guild.members.cache.get('333078725866291201').presence.status;
-    if(user.id === '333078725866291201') {
-        if(status === 'idle') {
-            msg.channel.send('malk está ausente agora');
-        } else if(status === 'dnd') {
-            msg.channel.send('malk está ocupado agora');
-        }
-        
-    }
-    
-    const args = msg.content.slice(config.prefix.length).trim().split(/ +/g);
-    const command = args.shift().toLowerCase();
-    const join = args.join(" ");
-    
-    
-});
+const commands = require('./commands');
 
-bot.login(config.token);
+bot.on('guildMemberAdd', member => {
+    const canal = member.guild.channels.cache.find(ch => ch.id === geral);
+    if(!canal) return;
+
+    canal.send(`<@${member.id}> fala mano, beleza?`)
+})
+
+bot.login(token);
