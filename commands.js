@@ -65,14 +65,4 @@ bot.on('message', async message => {
     }
 })
 
-
-bot.on('message', async message => {
-    if(message.content.startsWith('among?')) {
-        let velhao = message.guild.members.cache.get('700351217779474533').presence.status;
-        if(velhao === 'offline') {
-            message.reply('agora não, o velhão não tá online');
-        }
-    }
-});
-
 bot.login(token);
