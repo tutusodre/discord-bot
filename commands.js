@@ -32,6 +32,11 @@ bot.on('message', async message => {
         
     }
 
+    if(command === 'roll') {
+        var random = message.guild.members.cache.random();
+        message.channel.send(`random user: ${random}`);
+    }
+
     if(command === 'icon') {
         const iconuser = message.mentions.users.first();
         if(!iconuser) return message.reply("mencione alguem para conseguir o icon dessa pessoa");
