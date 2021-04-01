@@ -25,13 +25,13 @@ bot.on('message', async message => {
             bot.channels.fetch(geral).then(channel => {
                 channel.send(join);
                 message.delete();
-            }) 
+            }); 
             
         } else {
             let nomentioned = join.slice(mentioned.toString.length);
             mentioned.send(nomentioned);
             message.delete();
-            ;
+            
         }
         
     }
