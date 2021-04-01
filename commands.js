@@ -22,19 +22,23 @@ bot.on('message', async message => {
         const mentioned = message.mentions.users.first();
 
         if(!mentioned) {
-            bot.channels.fetch(geral).then(channel => {
+            bot.channels.fetch(teste).then(channel => {
                 channel.send(join);
+                message.delete();
             }) 
-            message.delete()
+            
         } else {
-            mentioned.send(join);
+            let nomentioned = join.slice(mentioned.toString.length);
+            mentioned.send(nomentioned);
+            message.delete();
+            ;
         }
         
     }
 
-    if(command === 'roll') {
-        var random = message.guild.members.cache.random();
-        message.channel.send(`random user: ${random}`);
+    if(command === 'roll' && message.content.endsWith(':')) {
+        let random = message.guild.members.cache.random();
+        message.channel.send(`${join} ${random}`);
     }
 
     if(command === 'icon') {
@@ -58,7 +62,7 @@ bot.on('message', async message => {
         return;
     }
     
-    let status = message.guild.members.cache.get('333078725866291201').presence.status;
+    const status = message.guild.members.cache.get('333078725866291201').presence.status;
     if(user.id === '333078725866291201') {
         if(status === 'idle') {
             message.channel.send('to ausente pera ai');
@@ -68,6 +72,7 @@ bot.on('message', async message => {
             message.channel.send('to offline pera ai')
         }
     }
+
 })
 
 bot.login(token);
