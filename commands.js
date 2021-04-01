@@ -22,7 +22,7 @@ bot.on('message', async message => {
         const mentioned = message.mentions.users.first();
 
         if(!mentioned) {
-            bot.channels.fetch(teste).then(channel => {
+            bot.channels.fetch(geral).then(channel => {
                 channel.send(join);
                 message.delete();
             }) 
