@@ -33,7 +33,8 @@ bot.on('message', async message => {
         } else if(message.content.toLowerCase().includes('random')) {
             let random = message.guild.members.cache.random();
             random.send(join.replace('random', ''));
-            message.channel.send(`mensagem enviada para: <@${random.id}>`)
+            message.channel
+            .send(`mensagem enviada para: <@${random.id}>: ${join.replace('random', '')}`)
             .then(msg => {
                 msg.delete({ timeout: 3000 })
             });
