@@ -21,19 +21,24 @@ bot.on('message', async message => {
     if(command === 'say') {
         const mentioned = message.mentions.users.first();
 
-        if(!mentioned) {
+        if(!mentioned && (!message.content.includes('random'))) {
             bot.channels.fetch(geral).then(channel => {
                 channel.send(join);
                 message.delete();
-            }) 
-            
-        } else {
+            });       
+        } else if(mentioned){
             let nomentioned = join.slice(mentioned.toString.length);
             mentioned.send(nomentioned);
             message.delete();
-            ;
+        } else if(message.content.toLowerCase().includes('random')) {
+            let random = message.guild.members.cache.random();
+            random.send(join.replace('random', ''));
+            message.channel.send(`mensagem enviada para: <@${random.id}>`)
+            .then(msg => {
+                msg.delete({ timeout: 3000 })
+            });
+            message.delete();
         }
-        
     }
 
     if(command === 'roll' && message.content.endsWith(':')) {
