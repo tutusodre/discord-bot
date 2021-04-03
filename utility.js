@@ -52,6 +52,10 @@ bot.on('message', async message => {
         message.reply(embed);
         message.delete()
     }
+
+    if(command === 'github') {
+        message.channel.send('https://github.com/tutusodre/discord-bot');
+    }
 });
 
 bot.login(token);

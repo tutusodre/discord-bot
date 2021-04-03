@@ -10,6 +10,13 @@ const supimpa = '814944768294649886';
 
 bot.once('ready', () => {
     console.log('ready');
+    bot.user.setPresence({
+        status: 'online',
+        activity: {
+            name: 'Fortnite',
+            type: 'PLAYING',
+        }
+    })
     
 })
 
