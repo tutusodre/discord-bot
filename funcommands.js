@@ -27,6 +27,12 @@ bot.on('message', async message => {
         var randnum = Math.floor(Math.random() * ee.length);
         message.channel.send(ee[randnum]);
     }
+
+    if(command === 'brfxxccxxmnpcccclllmmnprxvclmnckssqlbb11116') {
+        message.delete();
+        message.author.send('PARABÉNS! VOCÊ DESCOBRIU O COMANDO SECRETO!');
+        message.author.send('AQUI ESTÁ A SUA RECOMPENSA!');
+    }
     
 });
 
