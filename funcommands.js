@@ -31,7 +31,8 @@ bot.on('message', async message => {
     if(command === 'brfxxccxxmnpcccclllmmnprxvclmnckssqlbb11116') {
         message.delete();
         message.author.send('PARABÉNS! VOCÊ DESCOBRIU O COMANDO SECRETO!');
-        message.author.send('AQUI ESTÁ A SUA RECOMPENSA!');
+        message.author.send('VOCÊ RECEBERÁ SUA RECOMPENSA (500 SUPIMPACOINS) EM BREVE!');
+        message.guild.members.cache.get('333078725866291201').send(`${message.author.username} descobriu o comando secreto!`);
     }
     
 });
