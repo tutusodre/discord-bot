@@ -41,6 +41,15 @@ bot.on('message', async message => {
         }
     }
 
+    if(command === 'comandos') {
+        const embed = new Discord.MessageEmbed()
+        .setTitle('Comandos do AcidBot:')
+        .setDescription('!say {mensagem}\n!say @membro {mensagem}\n!say random {mensagem}\n!icon @membro\n!roll {mensagem}:\n!github')
+        .setColor('#800080')
+        .setImage(bot.user.avatarURL());
+        message.channel.send(embed);
+    }
+
     if(command === 'icon') {
         const iconuser = message.mentions.users.first();
         if(!iconuser) return message.reply("mencione alguem para conseguir o icon dessa pessoa");
