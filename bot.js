@@ -13,7 +13,8 @@ bot.once('ready', () => {
     
 })
 
-const commands = require('./commands');
+const utility = require('./utility');
+const funcommands = require('./funcommands');
 
 bot.on('guildMemberAdd', member => {
     const canal = member.guild.channels.cache.find(ch => ch.id === geral);
