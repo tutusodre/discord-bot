@@ -63,7 +63,11 @@ bot.on('message', async message => {
     }
 
     if(command === 'elon_r_u_ok') {
-        message.channel.send('About a year ago, Elon Musk was sitting in traffic in Los Angeles, and thought about how cool it would be if he built a tunnel under the city. So he built a tunnel under the city. And he started selling hats for his tunnel. Fifty thousand hats later, he got bored with hats, and switched the hats out for flamethrowers. He sold twenty thousand of those, and then five days later he tied his car up to the most powerful rocket ever made, and shot it into fucking space. And then the rocket fucking landed itself.');
+        message.delete();
+        message.channel.send('About a year ago, Elon Musk was sitting in traffic in Los Angeles, and thought about how cool it would be if he built a tunnel under the city. So he built a tunnel under the city. And he started selling hats for his tunnel. Fifty thousand hats later, he got bored with hats, and switched the hats out for flamethrowers. He sold twenty thousand of those, and then five days later he tied his car up to the most powerful rocket ever made, and shot it into fucking space. And then the rocket fucking landed itself.')
+        .then(msg => {
+            msg.delete( {timeout: 5000} );
+        })
     }
 
     if(command === 'github') {
