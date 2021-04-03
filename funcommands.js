@@ -25,7 +25,7 @@ bot.on('message', async message => {
     if(message.content.toLowerCase().includes('acid') && message.content.endsWith('?')) {
         const ee = ['sim', 'não'];
         var randnum = Math.floor(Math.random() * ee.length);
-        message.reply(ee[randnum]);
+        message.channel.send(ee[randnum]);
     }
     
 });
