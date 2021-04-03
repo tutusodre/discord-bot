@@ -3,7 +3,7 @@ const {prefix, token, geral,
     teste, supimpa} = require('./config.json');
 const bot = new Discord.Client();
 const fs = require('fs');
-const ytdl = require('ytdl-core')
+
 /*
 const testCh = '824035075654025286';
 let geral = '741240735340167208';
@@ -11,7 +11,7 @@ const supimpa = '814944768294649886';
 */
 
 bot.on('message', async message => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (message.author.bot) return;
     
     const args = message.content.slice(prefix.length).trim().split(' ');
     const command = args.shift().toLowerCase();
@@ -22,6 +22,12 @@ bot.on('message', async message => {
         message.channel.send(`${join} ${random}`);
     }
 
+    if(message.content.toLowerCase().includes('acid') && message.content.endsWith('?')) {
+        const ee = ['sim', 'não'];
+        var randnum = Math.floor(Math.random() * ee.length);
+        message.reply(ee[randnum]);
+    }
+    
 });
 
 bot.on('message', async message => {
@@ -41,6 +47,8 @@ bot.on('message', async message => {
             message.channel.send('to offline pera ai')
         }
     }
+    
+    
 
 })
 
