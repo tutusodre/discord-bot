@@ -23,7 +23,13 @@ bot.on('message', async message => {
     }
 
     if(message.content.toLowerCase().includes('acid') && message.content.endsWith('?')) {
-        const ee = ['sim', 'não'];
+        const ee = [];
+        for(i = 0; i < 92; i++) {
+            ee.push('sim');
+        }
+        for(j = 0; j < 8; j++) {
+            ee.push('não');
+        }
         var randnum = Math.floor(Math.random() * ee.length);
         message.channel.send(ee[randnum]);
     }
@@ -35,6 +41,15 @@ bot.on('message', async message => {
         message.guild.members.cache.get('333078725866291201').send(`${message.author.username} descobriu o comando secreto!`);
     }
     
+    if(command === 'spam') {
+        const mentioned = message.mentions.users.first();
+        for(i = 0; i < args[1]; i++) {
+            mentioned.send(`${message.content.slice(message.content.indexOf(args[1]) + 15)}`);
+        }
+        message.channel.send(`${mentioned.username} teve o pv spammado ${args[1]} vezes!`).then(msg => {
+            msg.delete( { timeout: 5000 } );
+        })
+    }
 });
 
 bot.on('message', async message => {

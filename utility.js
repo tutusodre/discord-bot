@@ -53,7 +53,7 @@ bot.on('message', async message => {
     if(command === 'icon') {
         const iconuser = message.mentions.users.first();
         if(!iconuser) return message.reply("mencione alguem para conseguir o icon dessa pessoa");
-        const embed = new Discord.MessageEmbed()
+        let embed = new Discord.MessageEmbed()
         .setImage(iconuser.avatarURL())
         .setColor('#800080')
         .setAuthor(iconuser.username)
