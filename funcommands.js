@@ -3,7 +3,7 @@ const {prefix, token, geral,
     teste, supimpa} = require('./config.json');
 const bot = new Discord.Client();
 const fs = require('fs');
-
+var count = 0;
 /*
 const testCh = '824035075654025286';
 let geral = '741240735340167208';
@@ -43,12 +43,21 @@ bot.on('message', async message => {
     
     if(command === 'spam') {
         const mentioned = message.mentions.users.first();
-        for(i = 0; i < args[1]; i++) {
-            mentioned.send(`${message.content.slice(message.content.indexOf(args[1]) + 15)}`);
-        }
-        message.channel.send(`${mentioned.username} teve o pv spammado ${args[1]} vezes!`).then(msg => {
-            msg.delete( { timeout: 5000 } );
-        })
+        mentioned.send(`${message.content.slice(message.content.indexOf(args[2]))}`)
+        .then(msg => {
+            msg.react('👍');
+        });
+        var x = setInterval(function() {
+            if(count < args[1]-1) {
+                mentioned.send(`${message.content.slice(message.content.indexOf(args[2]))}`)
+                .then(msg => {
+                    msg.react('👍');
+                });
+                count++;
+            } else {
+                clearInterval(x);
+            }
+        }, 3000);
     }
 });
 
