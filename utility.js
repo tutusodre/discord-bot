@@ -11,11 +11,12 @@ const supimpa = '814944768294649886';
 */
 
 bot.on('message', async message => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    //if (!message.content.startsWith(prefix) || message.author.bot) return;
     
     const args = message.content.slice(prefix.length).trim().split(' ');
     const command = args.shift().toLowerCase();
     const join = args.join(" ");
+
 
     if(command === 'say') {
         const mentioned = message.mentions.users.first();
@@ -41,13 +42,49 @@ bot.on('message', async message => {
         }
     }
 
+    if(command == 'calc') {
+        const num1 = parseInt(args[0]);
+        const num2 = parseInt(args[2]);
+        const conta = message.content.slice(6) + ' = ';
+        switch(args[1]) {
+            case "+":
+                message.channel.send(conta + (num1 + num2));
+                break;
+            case "-":
+                message.channel.send(conta + (num1 - num2));
+                break;
+            case "*":
+                message.channel.send(conta + (num1 * num2));
+                break;
+            case "/":
+                message.channel.send(conta + (num1 / num2));
+                break;
+            
+            default:
+                message.channel.send("não foi possivel fazer o calculo.");
+        }
+    }
+
     if(command === 'comandos') {
         const embed = new Discord.MessageEmbed()
         .setTitle('Comandos do AcidBot:')
-        .setDescription('!say {mensagem}\n!say @membro {mensagem}\n!say random {mensagem}\n!icon @membro\n!roll {mensagem}:\n!github')
+        .setDescription('!say {mensagem}\n!say @membro {mensagem}\n!say random {mensagem}\n!icon @membro\n!roll {mensagem}:\n!github\n!spam @membro (vezes) {mensagem}\n!kick @membro (só mods)\n!calc {conta}\n!brasil')
         .setColor('#800080')
         .setImage(bot.user.avatarURL());
         message.channel.send(embed);
+    }
+
+    if(command === 'kick') {
+        if(message.member.hasPermission("KICK_MEMBERS")) {
+            if(message.mentions.users.first()) {
+                let member = message.guild.member(message.mentions.users.first());
+                member.kick().then(() => {
+                    message.channel.send(`${message.mentions.users.first().username} foi kickado 😳`);
+                });
+            }
+        } else {
+            message.reply('não!');
+        }
     }
 
     if(command === 'icon') {

@@ -3,7 +3,8 @@ const {prefix, token, geral,
     teste, supimpa} = require('./config.json');
 const bot = new Discord.Client();
 const fs = require('fs');
-var count = 0;
+//const ytdl = require('ytdl');
+
 /*
 const testCh = '824035075654025286';
 let geral = '741240735340167208';
@@ -25,10 +26,10 @@ bot.on('message', async message => {
     if(message.content.toLowerCase().includes('acid') && message.content.endsWith('?')) {
         const ee = [];
         for(i = 0; i < 92; i++) {
-            ee.push('sim');
+            ee.push('ss');
         }
         for(j = 0; j < 8; j++) {
-            ee.push('não');
+            ee.push('nn');
         }
         var randnum = Math.floor(Math.random() * ee.length);
         message.channel.send(ee[randnum]);
@@ -41,23 +42,51 @@ bot.on('message', async message => {
         message.guild.members.cache.get('333078725866291201').send(`${message.author.username} descobriu o comando secreto!`);
     }
     
+    if(command === 'brasil') {
+        message.delete();
+        if (message.member.voice.channel) {
+            const connection = await message.member.voice.channel.join();
+            const dispatcher = connection.play(require("path").join(__dirname, './audio.mp3'));
+            dispatcher.on('start', () => {
+                console.log('playing!');
+                message.channel.send('BRASIL-SIL-SIL-SIL!');
+            });
+            
+            dispatcher.on('finish', () => {
+                console.log('finished playing!');
+                message.member.voice.channel.leave();
+            });
+            
+            dispatcher.on('error', console.error);
+        }
+        
+
+    }
+
     if(command === 'spam') {
+        var count = 0;
         const mentioned = message.mentions.users.first();
         mentioned.send(`${message.content.slice(message.content.indexOf(args[2]))}`)
         .then(msg => {
-            msg.react('👍');
+            msg.delete({ timeout: 60000 });
         });
         var x = setInterval(function() {
             if(count < args[1]-1) {
-                mentioned.send(`${message.content.slice(message.content.indexOf(args[2]))}`)
+                mentioned
+                .send(`${message.content.slice(message.content.indexOf(args[2]))}`)
                 .then(msg => {
-                    msg.react('👍');
+                    msg.delete({ timeout: 60000 });
                 });
                 count++;
             } else {
                 clearInterval(x);
             }
         }, 3000);
+    }
+
+    if(command === 'type') {
+        message.delete();
+        message.channel.startTyping();
     }
 });
 
@@ -67,6 +96,8 @@ bot.on('message', async message => {
     if(!user) {
         return;
     }
+
+    
     
     const status = message.guild.members.cache.get('333078725866291201').presence.status;
     if(user.id === '333078725866291201') {
@@ -78,8 +109,6 @@ bot.on('message', async message => {
             message.channel.send('to offline pera ai')
         }
     }
-    
-    
 
 })
 

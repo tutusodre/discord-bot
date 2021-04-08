@@ -13,19 +13,19 @@ bot.once('ready', () => {
     bot.user.setPresence({
         status: 'online',
         activity: {
-            name: 'Fortnite',
-            type: 'PLAYING',
+            name: '1Acid on twitch',
+            type: 'STREAMING',
+            url: 'https://www.youtube.com/watch?v=lPGipwoJiOM'
         }
-    })
-    
+    });
 })
 
 const utility = require('./utility');
 const funcommands = require('./funcommands');
 
 bot.on('guildMemberAdd', member => {
-    const canal = member.guild.channels.cache.find(ch => ch.id === geral);
-    if(!canal) return;
+     const canal = member.guild.channels.cache.find(ch => ch.id === geral);
+     if(!canal) return;
 
     canal.send(`<@${member.id}> fala mano, beleza?`)
 })
