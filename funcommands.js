@@ -44,23 +44,25 @@ bot.on('message', async message => {
     
     if(command === 'brasil') {
         message.delete();
-        if (message.member.voice.channel) {
-            const connection = await message.member.voice.channel.join();
-            const dispatcher = connection.play(require("path").join(__dirname, './audio.mp3'));
-            dispatcher.on('start', () => {
-                console.log('playing!');
-                message.channel.send('BRASIL-SIL-SIL-SIL!');
-            });
-            
-            dispatcher.on('finish', () => {
-                console.log('finished playing!');
-                message.member.voice.channel.leave();
-            });
-            
-            dispatcher.on('error', console.error);
-        }
+        if (!message.member.voice.channel) return;
+        const connection = await message.member.voice.channel.join();
+        const dispatcher = connection.play(require("path").join(__dirname, './audio.mp3'));
+        dispatcher.on('start', () => {
+            console.log('playing!');
+            message.channel.send('BRASIL-SIL-SIL-SIL!');
+        });
         
+        dispatcher.on('finish', () => {
+            console.log('finished playing!');
+            message.member.voice.channel.leave();
+        });
+        
+        dispatcher.on('error', console.error);
+    }
 
+    if(command === 'span') {
+        const mentioned = message.mentions.users.first();
+        mentioned.send(`${message.content.slice(message.content.indexOf(args[2]))}`);
     }
 
     if(command === 'spam') {
@@ -86,7 +88,17 @@ bot.on('message', async message => {
 
     if(command === 'type') {
         message.delete();
+        message.channel.send('olha isso que eu vou mandar: ');
         message.channel.startTyping();
+        var x = setInterval(function() {
+            message.channel.send('pera ai...');
+            clearInterval(x);
+        }, 15000);
+
+        var y = setInterval(function() {
+            message.channel.stopTyping();
+            clearInterval(x);
+        }, 15000);
     }
 });
 

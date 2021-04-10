@@ -3,7 +3,11 @@ const {prefix, token, geral,
     teste, supimpa} = require('./config.json');
 const bot = new Discord.Client();
 const fs = require('fs');
-const ytdl = require('ytdl-core')
+const ytdl = require('ytdl-core');
+const Calculator = require("@mroutput/jscalc");
+
+var calc = new Calculator();
+
 /*
 const testCh = '824035075654025286';
 let geral = '741240735340167208';
@@ -43,9 +47,11 @@ bot.on('message', async message => {
     }
 
     if(command == 'calc') {
+        /*
         const num1 = parseInt(args[0]);
         const num2 = parseInt(args[2]);
         const conta = message.content.slice(6) + ' = ';
+        
         switch(args[1]) {
             case "+":
                 message.channel.send(conta + (num1 + num2));
@@ -63,6 +69,10 @@ bot.on('message', async message => {
             default:
                 message.channel.send("não foi possivel fazer o calculo.");
         }
+        
+        */
+        const conta = message.content.slice(message.content.indexOf(args[0]));
+        message.channel.send(`${conta} = ${calc.exec(conta)}`)
     }
 
     if(command === 'comandos') {
@@ -74,12 +84,30 @@ bot.on('message', async message => {
         message.channel.send(embed);
     }
 
+    if(command === 'kikc') {
+        if(!message.mentions.users.first()) return;
+        message.channel.send(`${message.mentions.users.first().username} foi kickado 😳`);
+    }
+
     if(command === 'kick') {
         if(message.member.hasPermission("KICK_MEMBERS")) {
             if(message.mentions.users.first()) {
                 let member = message.guild.member(message.mentions.users.first());
                 member.kick().then(() => {
                     message.channel.send(`${message.mentions.users.first().username} foi kickado 😳`);
+                });
+            }
+        } else {
+            message.reply('não!');
+        }
+    }
+
+    if(command === 'ban') {
+        if(message.member.hasPermission("BAN_MEMBERS")) {
+            if(message.mentions.users.first()) {
+                let member = message.guild.member(message.mentions.users.first());
+                member.ban().then(() => {
+                    message.channel.send(`${message.mentions.users.first().username} foi BANIDO`);
                 });
             }
         } else {
